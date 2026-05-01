@@ -24,10 +24,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 'lts/*'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm cache clean --force
+          rm -f package-lock.json
+          npm install --registry=https://registry.npmjs.org
 
       - name: Build
         run: npm run build
